@@ -38,7 +38,7 @@ _namespace = {
     'Advertising effectiviness': 'ad_effectiviness',
     'Competitor\'s advertising effectiviness': 'comp_ad_effectiviness',
     'Tolerance': 'tolerance',
-    'aggressiveness': 'aggressiveness',
+    'Aggressiveness': 'aggressiveness',
     'Satisfying fraction': 'satis_fraction',
     'Competiror\'s satisfying fraction': 'comp_satis_fraction',
     'Neutral fraction': 'neutral_fraction',
@@ -174,12 +174,12 @@ def contact_rate():
     return 100
 
 @cache('run')
-def ad_effectiviness():
-    return 0.011
-
-@cache('run')
 def adopting_fraction():
     return 0.015
+
+@cache('run')
+def ad_effectiviness():
+    return 0.011
 
 @cache('run')
 def comp_ad_effectiviness():
@@ -198,19 +198,19 @@ def satis_fraction():
     return 0.2
 
 @cache('run')
-def comp_satis_fraction():
-    return 0.4
-
-@cache('run')
 def neutral_fraction():
     return 0.7
+
+@cache('run')
+def comp_satis_fraction():
+    return 0.4
 
 @cache('run')
 def comp_neutral_fraction():
     return 0.5
 
 _integ_potential_customers = functions.Integ(
-    lambda: -adopting_rate() + frustration_rate() - comp_adopting_rate() + comp_frustration_rate(), 
+    lambda: frustration_rate() + comp_frustration_rate() - comp_adopting_rate() - adopting_rate(), 
     lambda: total_population())
 _integ_customers = functions.Integ(
     lambda: adopting_rate() + poaching_rate() - frustration_rate() - comp_poaching_rate(),
