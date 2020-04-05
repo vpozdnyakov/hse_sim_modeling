@@ -131,7 +131,7 @@ def comp_poaching_rate():
             neutral_fraction() + 
             (1 - satis_fraction() - neutral_fraction()) * 
             tolerance() / 
-            adopting_rate()
+            adopting_fraction()
         ) * tolerance()
     )
 
